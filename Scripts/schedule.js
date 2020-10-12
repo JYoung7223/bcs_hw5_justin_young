@@ -1,5 +1,6 @@
 /***** Declare variables *****/
 var currentTime = "";
+var localStoragePrefix = "task-";
 var scheduleStart = 6;
 var scheduleEnd = 23;
 var hourMarkedPresent = 0;
@@ -24,6 +25,7 @@ let motivationEndElement = $("#motivation-end");
 
 /***** Add event listeners *****/
 var currentTimeInterval = setInterval(updateTime, 1000);
+$("#schedule").on("click", scheduleClicked);
 
 /***** Helper Functions *****/
 // This function will update the time to the current time.
@@ -65,6 +67,7 @@ function printSchedule(){
         }
         scheduleTaskElement.attr("data-hr",i);
         scheduleTaskElement.attr("placeholder","Task");
+        scheduleTaskElement.text(getStoredTask(i));
         // Save Column
         var scheduleSaveElement = $("<button>");
         scheduleSaveElement.addClass("col-1 saveBtn py-auto h-100");
@@ -102,6 +105,27 @@ function updatePresentHr(){
             hourMarkedPresent = prHr;
         }
     });
+}
+
+// This function will save the tasks to the localStorage
+function scheduleClicked(event){
+    var clickedElement = event.target;
+    if((clickedElement.matches("i"))||(clickedElement.matches("button"))){
+        // Get Task and Save to local storage
+        var hr = $(clickedElement).attr("data-save");
+        var task = $("textarea[data-hr='" + hr + "']")[0].value;
+        console.log(task);
+        localStorage.setItem(localStoragePrefix+hr, task);
+    }
+}
+
+// This function will retrieve task from localStorage
+function getStoredTask(hr){
+    var task = localStorage.getItem(localStoragePrefix+hr);
+    if(task === null){
+        task = "";
+    }
+    return task;
 }
 
 /***** Logic *****/
