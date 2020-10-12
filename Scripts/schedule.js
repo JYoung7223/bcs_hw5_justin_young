@@ -2,6 +2,7 @@
 var currentTime = "";
 var scheduleStart = 6;
 var scheduleEnd = 23;
+var hourMarkedPresent = 0;
 var motivationals = [
     "Just Do It!",
     "Time Will Pass Eitherway, Do Something With It",
@@ -29,6 +30,9 @@ var currentTimeInterval = setInterval(updateTime, 1000);
 function updateTime(){
     currentTime = moment().format("MMM DD YYYY, h:mm:ss a");
     timeElement.text("It is "+currentTime);
+    if(parseInt(moment().format("H")) !== hourMarkedPresent){
+        updatePresentHr();
+    }
 }
 
 // This function will prepare a time row
@@ -50,7 +54,15 @@ function printSchedule(){
         // Task Column
         var scheduleTaskElement = $("<textarea>");
         // Past Current and Future hours to use different colors.
-        scheduleTaskElement.addClass("col border form-control present h-100");
+        var currentHr = parseInt(moment().format("H"));
+        if(i < currentHr){
+            scheduleTaskElement.addClass("col border form-control past h-100");
+        }else if (i > currentHr){
+            scheduleTaskElement.addClass("col border form-control future h-100");
+        }else{
+            scheduleTaskElement.addClass("col border form-control present h-100");
+            hourMarkedPresent = currentHr;
+        }
         scheduleTaskElement.attr("data-hr",i);
         scheduleTaskElement.attr("placeholder","Task");
         // Save Column
@@ -73,6 +85,23 @@ function printSchedule(){
 
     // Footer Motivation
     motivationEndElement.html(motivationals[Math.floor(Math.random()*motivationals.length)]);
+}
+
+// This function will update the styling using passed in marked hr as present
+function updatePresentHr(){
+    $("textarea").each(function(index, element){
+        var elHr = parserInt($(element).data("hr"));
+        var prHr = parseInt(moment().format("H"));
+        $(element).removeClass();   // Clears class attribute
+        if(elHr < prHr){
+            $(element).addClass("col border form-control past h-100");
+        }else if (elHr > prHr){
+            $(element).addClass("col border form-control future h-100");
+        }else{
+            $(element).addClass("col border form-control present h-100");
+            hourMarkedPresent = prHr;
+        }
+    });
 }
 
 /***** Logic *****/
