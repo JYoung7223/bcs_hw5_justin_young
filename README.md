@@ -1,6 +1,6 @@
 # 05 Third-Party APIs: Work Day Scheduler
 
-## Your Task
+## Task
 
 Create a simple calendar application that allows a user to save events for each hour of the day by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
 
@@ -42,9 +42,7 @@ The following animation demonstrates the application functionality:
 ![day planner demo](./Assets/05-third-party-apis-homework-demo.gif)
 
 
-## Grading Requirements
-
-This homework is graded based on the following criteria: 
+## Deliverables - KPIs
 
 ### Technical Acceptance Criteria: 40%
 
@@ -83,13 +81,15 @@ This homework is graded based on the following criteria:
 * Repository contains quality README file with description, screenshot, and link to deployed application
 
 
-## Review
+## Results
 
-You are required to submit BOTH of the following for review:
+* You can find the finished product at the below URL:
 
-* The URL of the functional, deployed application.
+https://jyoung7223.github.io/bcs_hw5_justin_young/
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+* Below is a gif of the finished product as well:
+
+![](./Assets/my-schedule.gif)
 
 - - -
 © 2020 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
